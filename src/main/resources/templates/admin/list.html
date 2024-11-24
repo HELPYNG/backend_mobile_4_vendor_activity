@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+</head>
+<body>
+	<nav>
+		<div>
+			<div>
+				<ul>
+					<li><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/fabricante/fabricanteIndex}">Fabricante</a></li>
+					<li><a th:href="@{/grupo/grupoIndex}">Grupo</a></li>
+					<li><a th:href="@{/subgrupo/subGrupoIndex}">SubGrupo</a></li>
+					<li><a th:href="@{/produto/produtoIndex}">Produto</a></li>
+					<li><a th:href="@{/vendas/vendasIndex}">Vendas</a></li>
+					<li><a th:href="@{/admin/adminIndex}">Admin</a></li>
+					<li>
+						<form th:action="@{/}" method="POST">
+							<button type="submit">Logout</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div>
+		<h3>Admin List</h3>
+		<a th:href="@{/admin/register}">Add Admin</a>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="admin : ${admins}">
+					<td th:text="${admin.id}"></td>
+					<td th:text="${admin.name}"></td>
+					<td th:text="${admin.email}"></td>
+					<td>
+						<a th:href="@{/admin/edit/{id}(id=${admin.id})}">Edit</a>
+						<form th:action="@{/admin/delete/{id}(id=${admin.id})}" method="POST" style="display:inline;">
+							<button type="submit">Delete</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
